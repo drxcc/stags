@@ -60,11 +60,6 @@ object TagGenerator {
     Scope(loop(ref, Seq.empty))
   }
 
-  def traceShow[A0](a: A0): A0 = {
-    println("=========\n\t" + a.toString)
-    a
-  }
-
   private def tagsForStatement(
       scope: Scope,
       child: Stat,

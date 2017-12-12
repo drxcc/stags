@@ -32,7 +32,9 @@ object ScopedTag {
     val tokenName = member.name.toString
     val nameS = member.name.pos.start
     val statS = member.pos.start
-    val line = member.tokens.toString
+    // DESNOTE(2017-12-11, pjrt): Classes and the like return the full class.
+    // We want the first line. Head call should be safe.
+    val line = member.tokens.toString.split('\n').head
 
     val nameOffset = nameS - statS
     val tagAddress = {

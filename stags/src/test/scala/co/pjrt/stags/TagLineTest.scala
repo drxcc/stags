@@ -30,7 +30,7 @@ class TagLineTest extends FreeSpec with Matchers {
 
       val testFile = Path.fromString("TestFile.scala")
       TagLine(t, testFile).vimTagLine shouldBe
-        s"""tagName\t$testFile\t${addr}"\tlanguage:scala"""
+        s"""tagName\t$testFile\t${addr};"\tlanguage:scala"""
     }
 
     "should produce a complete static tag line" in {
@@ -39,7 +39,7 @@ class TagLineTest extends FreeSpec with Matchers {
 
       val testFile = Path.fromString("TestFile.scala")
       TagLine(t, testFile).vimTagLine shouldBe
-        s"""tagName\t$testFile\t${addr}"\tfile:\tlanguage:scala"""
+        s"""tagName\t$testFile\t${addr};"\tfile:\tlanguage:scala"""
     }
   }
 

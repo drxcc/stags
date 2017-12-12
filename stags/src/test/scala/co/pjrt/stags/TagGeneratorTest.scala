@@ -1,5 +1,7 @@
 package co.pjrt.stags
 
+import scala.meta._
+
 import org.scalatest.{FreeSpec, Matchers}
 
 import Utils._
@@ -345,5 +347,28 @@ class TagGeneratorTest extends FreeSpec with Matchers {
       (abc(), "TraitA", false),
       (Scope.empty, "declDef", false)
     )
+  }
+
+  "address generation" - {
+
+    "should generate the right address for a class and def" in {
+
+      val testFile =
+        """
+      |package a.b.c
+      |
+      |class SomeClass() {
+      | def hello(name: String) = name
+      |}
+      """.stripMargin
+
+      val defAddr = "/def \\zshello(name: String) = name/"
+      val classAddr = "/class \\zsSomeClass() {/"
+
+      val s = testFile.parse[Source].get
+      val actual = TagGenerator.generateTags(s).map(_.tag.tagAddress)
+      actual should contain(defAddr)
+      actual should contain(classAddr)
+    }
   }
 }
